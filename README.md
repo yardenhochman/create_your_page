@@ -1,4 +1,4 @@
-# launch your page
+# Launch your page
 WireFrame: https://go.gliffy.com/go/share/sj4eu0xct7vypdgd1q4m
 
 Database: https://go.gliffy.com/go/share/s1bnp0p1w753ie9fm3eo
