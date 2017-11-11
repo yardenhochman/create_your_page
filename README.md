@@ -12,4 +12,4 @@ https://docs.google.com/document/d/e/2PACX-1vTvx6IvWmei8j9Z_T9960RVhA2-k04hRXs87
 
 Technologies: React On Express
 
-This website aims to allow anyone to make his own page, creating a web business card
+This website aims to allow anyone to make his own page, creating an online business card
