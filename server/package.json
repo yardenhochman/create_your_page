@@ -1,6 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "babel": {
+    "optional": ["es7.classProperties"]
+  },
   "description": "this will be the server",
   "main": "index.js",
   "scripts": {
