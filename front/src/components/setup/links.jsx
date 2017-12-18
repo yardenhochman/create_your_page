@@ -1,19 +1,81 @@
 import React, { Component } from 'react';
+import NewLinkForm from './links/NewLinkForm';
+import LinkList from './links/LinkList';
 
 class Links extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      links_num: 0,
-      links:null
+      links:[],
+      showForm:false
     }
-    this.something = this.something.bind(this)
-    this.submitLink = this.submitLink.bind(this)
+    this.updateLinks = this.updateLinks.bind(this);
+    this.displayForm = this.displayForm.bind(this);
+    this.hideForm = this.hideForm.bind(this);
   }
-  something() {
-    console.log("hello")
+  displayForm(event=0) {
+    event &&event.preventDefault();
+    this.setState({ showForm: true });
   }
-  submitLink(event) {
+  hideForm(event=0) {
+    event&&event.preventDefault();
+    this.setState({ showForm: false });
+  }
+
+  updateLinks(link, id = -1, action = 'create') {
+    const links = this.state.links;
+    switch (action) {
+      case 'create':
+        links.push(link);
+        break;
+      case 'update':
+        links[id] = link;
+        break;
+      case 'delete':
+        delete links[id]
+        break;
+      default:
+        console.log('here')
+    }
+    this.setState( {links: links} )
+  }
+  
+  render() {
+    const {sendLinks, BackStep, done} = this.props
+    return (
+      <div className="App container-fluid">
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <NewLinkForm 
+              updateLinks={this.updateLinks} 
+              displayForm={this.displayForm} 
+              hideForm={this.hideForm} 
+              showForm={this.state.showForm} 
+            />
+          </div>
+          {!this.state.showForm&&<div>
+            <h2 className="text-center">Your Project List</h2>
+            <LinkList 
+              links={this.state.links} 
+              updateLinks={this.updateLinks} 
+            />
+          
+          <div className="box">
+            <button id='sendImage' name='profile_pic' onClick={done}>OK</button>
+            <button className='back_button' onClick={BackStep}>Back</button>
+          </div>
+          </div>}
+        </div>
+      </div>
+    );
+  }
+
+}
+export default Links;
+
+
+
+/*   submitLink(event) {
     event.preventDefault()
     const title = event.target.title.value;
     const description = event.target.description.value;
@@ -26,7 +88,7 @@ class Links extends Component {
     link.url = url;
     linksList.push(link);
     this.setState({links: linksList})
-  }
+  } */
 /*   renderList() {
     if (!this.state.links)
       return
@@ -35,31 +97,10 @@ class Links extends Component {
       <img src={link.url} className="profileImage Preview" />
     </li> )
   } */
-  render() {
-    const {done,BackStep,sendLinks,} = this.props
-    const {links_num,links} = this.state
-    return (
-      <div>
-        {/* <ul className="links_list">{this.renderList()}</ul> */}
-        <div className="set">
-          <div className="question-container">
-          <h3>Please provide links to your work. </h3>
-          </div>
-          <form onSubmit={this.submitLink}>
-            <input type="text" name="title" placeholder="Title" required></input>
-            <input type="url" name="url" placeholder="web address" required></input>
-            <input type="text" name="description" placeholder="Describe this website" required></input>
-            <input type="submit" value="OK"/>
-          </form>
-        </div>
-        <button className='done_button' onClick={links?sendLinks(links):''}>Done</button>
-        <button className='back_button' onClick={BackStep}>Back</button>
-      </div>
-    )
-  }
-}
 
-export default Links;
+
+
+
 
 
 /* 

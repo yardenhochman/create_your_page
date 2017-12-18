@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
 class screen1 extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {
+  state = {
           something: null
       }
-  }
+  
 
   render() {
     const {name,occupation,email,sm} = this.props;
