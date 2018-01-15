@@ -1,49 +1,15 @@
 const db = require('../db/config');
 const Site = {};
 
-Site.createSite = data => {
-  const {
-    name,
-    profile_type,
-    facebook,
-    instagram,
-    email,
-    color1,
-    color2,
-    description,
-    occupation,
-    profile_pic,
-    linkedIn,
-    password,
-    picture1,
-    picture2,
-    picture3,
-    twitter,
-  } = data;
+Site.createSite = site => {
+  const {name,profile_type,facebook,instagram,email,color1,color2,description,occupation,profile_pic,linkedIn,password,picture1,picture2,picture3,twitter} = site;
   return db.one(
     `
     INSERT INTO sites
     (name,profile_type,facebook,instagram,email,color1,color2,description,occupation,profile_pic,linkedIn,password,picture1,picture2,picture3,twitter)
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16)
     RETURNING *`,
-    [
-      name,
-      profile_type,
-      facebook,
-      instagram,
-      email,
-      color1,
-      color2,
-      description,
-      occupation,
-      profile_pic,
-      linkedIn,
-      password,
-      picture1,
-      picture2,
-      picture3,
-      twitter,
-    ],
+    [name, profile_type, facebook, instagram, email, color1, color2, description, occupation, profile_pic, linkedIn, password, picture1, picture2, picture3, twitter]
   );
 };
 
@@ -52,7 +18,7 @@ Site.show = name => {
     `
   SELECT * FROM sites
   WHERE name = $1`,
-    name,
+    name
   );
 };
 
@@ -61,22 +27,12 @@ Site.removeSite = name => {
     `
   DELETE FROM sites
   WHERE name = $1`,
-    name,
+    name
   );
 };
 
 Site.changeSite = site => {
-  const {
-    name,
-    profile_type,
-    facebook,
-    instagram,
-    email,
-    color1,
-    color2,
-    description,
-    occupation,
-  } = site;
+  const { name, profile_type, facebook, instagram, email, color1, color2, description, occupation } = site;
   return db.one(
     `
   UPDATE sites SET
@@ -90,17 +46,7 @@ Site.changeSite = site => {
   occupation = $9,
   WHERE name = $1
   RETURNING *`,
-    [
-      name,
-      profile_type,
-      facebook,
-      instagram,
-      email,
-      color1,
-      color2,
-      description,
-      occupation,
-    ],
+    [name,profile_type,facebook,instagram,email,color1,color2,description,occupation]
   );
 };
 Site.SiteNames = () => {
