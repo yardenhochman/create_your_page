@@ -34,9 +34,7 @@ app.use(passport.session());
 
 
 const PORT = process.env.PORT || 3002;
-app.listen(PORT, () => {
-  console.log(`listening on port ${PORT}!`);
-});
+app.listen(PORT, () => console.log(`listening on port ${PORT}!`));
 
 
 
@@ -46,9 +44,5 @@ const viewRoutes = require('./routes/view-routes');
 app.use('/site', viewRoutes);
 const configRoutes = require('./routes/config-routes');
 app.use('/config', configRoutes);
-
-app.get('/', (req, res) =>   res.send('hello there') );
-
-app.get('*', (req, res) => {
-    res.send('404error');
-  });
+app.get('/', (req, res) => res.send('hello there') );
+app.get('*', (req, res) => res.send('404error'));
